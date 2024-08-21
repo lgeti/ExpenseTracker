@@ -1,6 +1,11 @@
 <script setup>
 
-const props = defineProps(['transactions']);
+const props = defineProps({
+	transactions: {
+		type: Array,
+		required: true
+	}
+});
 
 </script>
 
