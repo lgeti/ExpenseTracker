@@ -21,13 +21,24 @@ import { useToast } from 'vue-toastification';
 const text = ref('');
 const amount = ref('');
 
+const emit = defineEmits(['transactionSubmitted']);
+
 const onSubmit = () => {
 	if (text.value.trim() === '' || amount.value.trim() === '') {
 		useToast().error('Please enter text and amount');
-		console.log('Please enter text and amount');
+
+		
 	} else {
+		const transactionData = {
+			text: text.value,
+			amount: parseFloat(amount.value)
+		}
+
+		emit('transactionSubmitted', transactionData);
+		
+		text.value = '';
+		amount.value = '';
 		useToast().success('Transaction added');
-		console.log(text.value, amount.value);
 	}
 }
 </script>
