@@ -38,7 +38,6 @@ const onSubmit = () => {
 		
 		text.value = '';
 		amount.value = '';
-		useToast().success('Transaction added');
 	}
 }
 </script>

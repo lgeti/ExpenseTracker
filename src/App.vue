@@ -37,13 +37,22 @@ const expenses = computed(() => {
 });
 
 // Add transaction
-const handleTrasactionSubmitted = (transactionData) => {
+const handleTransactionSubmitted = (transactionData) => {
 	transactions.value.push({
 		id: transactions.value.length + 1,
 		text: transactionData.text,
 		amount: transactionData.amount
 	});
+
+	toast.success('Transaction added');
 }
+
+// Delete transaction
+const handleTransactionDeleted = (id) => {
+	transactions.value = transactions.value.filter(transaction => transaction.id !== id);
+	toast.success('Transaction deleted');
+}
+
 
 </script>
 
@@ -52,7 +61,7 @@ const handleTrasactionSubmitted = (transactionData) => {
 	<div class="container">
 		<Balance :total="+total"/>
 		<IncomeExpenses :income="+income" :expenses="+expenses"/>
-		<TransactionList :transactions="transactions" />
-		<AddTransaction @transactionSubmitted="handleTrasactionSubmitted"/>
+		<TransactionList :transactions="transactions" @transactionDeleted="handleTransactionDeleted"/>
+		<AddTransaction @transactionSubmitted="handleTransactionSubmitted"/>
 	</div>
 </template>
